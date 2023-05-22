@@ -19,17 +19,24 @@
   list.add(new MemberDto(2, "해골", "행신동"));
   list.add(new MemberDto(3, "원숭이", "상도동"));
 %>
-<h1>회원 목록표</h1>
-<table>
-  <tr>
-    <th>번호</th>
-    <th>이름</th>
-    <th>주소</th>
-  </tr>
-  <tr>
-<%for (MemberDto member: list) {%>
-  <tr><td><%=member.getNum() %></td>
-  <td><%=member.getName() %></td>
-  <td><%=member.getAddr() %></td></tr><%} %>
+  <h1>회원 목록표</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>이름</th>
+        <th>주소</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%for (MemberDto member: list) {%>
+      <tr>
+        <td><%=member.getNum() %></td>
+        <td><%=member.getName() %></td>
+        <td><%=member.getAddr() %></td>
+      </tr>
+    <%} %>
+    </tbody>
+  </table>
 </body>
 </html>

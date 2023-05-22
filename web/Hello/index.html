@@ -5,6 +5,9 @@
     <title>Title</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+        @import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+
+
         .button_container {
             position: absolute;
             left: 0;
@@ -72,23 +75,49 @@
             color: #000;
             font-size: 25px;
         }
+
+        .container {
+            position: relative;
+            padding: 30px;
+
+        }
+
+        body {
+            margin: 0 auto;
+            width: 1000px;
+            text-align: center;
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        h1{
+            font-size: 60px;
+            font-weight: normal;
+        }
+
+        p{
+            font-size: 30px;
+            font-weight: normal;
+        }
+
     </style>
 </head>
 <body>
     <h1>인덱스 페이지 입니다.</h1>
     <p>내이름은 <strong>황현근</strong></p>
-    <img src="images/123.png" alt="개발진스" height="380" width="380">
-    <br>
-    <button class="btn btn-primary btn-jittery" onclick="location.href='sub/play.html';"><span>놀러가기</span></button>
-    <!-- 웹에서의 절대 경로 -->
-<!--    <a href="http://localhost:8888/Hello/sub/play.html">놀러가기</a>-->
-    <!-- 서버 안에서의 절대 경로 -->
-<!--    <a href="/Hello/sub/play.html">놀러가기</a>-->
-    <!-- 현재 위치를 기준으로 한 상대경로 -->
-<!--    <a href="sub/play.html">놀러가기</a>-->
-<!--    <a href="/Hello/sub/play.html">놀러가기</a>-->
-    <!-- ./ = 현재 경로 , ../ 상위 경로 -->
-    <br><br>
+    <div class="container">
+        <img src="images/123.png" alt="개발진스" height="380" width="380">
+        <br><br>
+        <button class="btn btn-primary btn-jittery" onclick="location.href='sub/play.html';"><span>놀러가기</span></button>
+        <!-- 웹에서의 절대 경로 -->
+    <!--    <a href="http://localhost:8888/Hello/sub/play.html">놀러가기</a>-->
+        <!-- 서버 안에서의 절대 경로 -->
+    <!--    <a href="/Hello/sub/play.html">놀러가기</a>-->
+        <!-- 현재 위치를 기준으로 한 상대경로 -->
+    <!--    <a href="sub/play.html">놀러가기</a>-->
+    <!--    <a href="/Hello/sub/play.html">놀러가기</a>-->
+        <!-- ./ = 현재 경로 , ../ 상위 경로 -->
+        <br>
+    </div>
     <form action="/users/signup" method="post">
         <label for="id">아이디</label>
         <input type="text" name="id" id="id">

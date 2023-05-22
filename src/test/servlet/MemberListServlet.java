@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/member/list")
-public class MemberServlet extends HttpServlet {
+public class MemberListServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,7 +26,7 @@ public class MemberServlet extends HttpServlet {
         pw.println("<html>");
         pw.println("<head>");
         pw.println("<meta Charset='utf-8'>");
-        pw.println("<title></title>");
+        pw.println("<title>회원 목록 페이지</title>");
         pw.println("</head>");
         pw.println("<body>");
         List<MemberDto> list=new ArrayList<>();
@@ -35,18 +35,23 @@ public class MemberServlet extends HttpServlet {
         list.add(new MemberDto(3, "원숭이", "상도동"));
         pw.println("<h1>회원 목록표</h1>");
         pw.println("<table>");
-        pw.println("<tr>");
-        pw.println("<th>번호</th>");
-        pw.println("<th>이름</th>");
-        pw.println("<th>주소</th>");
-        pw.println("</tr>");
-        for (MemberDto member: list) {
-            pw.println("<tr>");
-            pw.println("<td>"+member.getNum()+"</td>");
-            pw.println("<td>"+member.getName()+"</td>");
-            pw.println("<td>"+member.getAddr()+"</td>");
-            pw.println("</tr>");
-        }
+            pw.println("<thead>");
+                pw.println("<tr>");
+                    pw.println("<th>번호</th>");
+                    pw.println("<th>이름</th>");
+                    pw.println("<th>주소</th>");
+                pw.println("</tr>");
+            pw.println("</thead>");
+            pw.println("<tbody>");
+            for (MemberDto member: list) {
+                pw.println("<tr>");
+                pw.println("<td>"+member.getNum()+"</td>");
+                pw.println("<td>"+member.getName()+"</td>");
+                pw.println("<td>"+member.getAddr()+"</td>");
+                pw.println("</tr>");
+            }
+            pw.println("</tbody>");
+        pw.println("</table>");
         pw.println("</body>");
         pw.println("</html>");
         pw.close();
