@@ -106,33 +106,36 @@ public class GuestDao {
         return rowCount > 0;
     }
 
-    public boolean check(int num, String pw){
-        int rowCount = 0;
+    public String check(int num){
         Connection conn = null;
         PreparedStatement pstmt=null;
+        ResultSet rs = null;
+        GuestDto dto = new GuestDto();
         try {
             //Connection 객체의 참조값 얻어오기
             conn = new DbcpBean().getConn();
             //실행할 sql문
-            String sql = "SELECT * FROM board_guest"
-                    + " WHERE num = ? AND pw = ?";
+            String sql = "SELECT pwd FROM board_guest"
+                    + " WHERE num = ?";
             //sql문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
             pstmt = conn.prepareStatement(sql);
             //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.
             pstmt.setInt(1, num);
-            pstmt.setString(2, pw);
-            rowCount = pstmt.executeUpdate(); //수행하고 리턴되는 값을 변수에 담는다.
-            System.out.println("비밀번호 일치");
+            rs = pstmt.executeQuery(); //수행하고 리턴되는 값을 변수에 담는다.
+            while (rs.next()) {
+                dto.setPwd(rs.getString("pwd"));
+            }
         } catch (Exception e){
             e.printStackTrace();
         } finally { //예외가 발생을 하던 안하던 실행이 보장되는 블럭에서 사용
             try {
                 if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
+                if (rs != null) rs.close();
             } catch (Exception ignored) {}
         }
         //변화된 row 의 개수가 0보다 크면 작업 성공
-        return rowCount > 0;
+        return dto.getPwd();
     }
 
     public boolean delete(int num){
