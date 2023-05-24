@@ -4,9 +4,11 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/web/Hello/index.html" value="file://$PROJECT_DIR$/web/Hello" />
+        <entry key="file://$PROJECT_DIR$/web/Step02DataBase/guest/list.jsp" value="file://$PROJECT_DIR$/web/Step02DataBase/guest" />
         <entry key="file://$PROJECT_DIR$/web/Step02DataBase/index.jsp" value="file://$PROJECT_DIR$/web" />
         <entry key="file://$PROJECT_DIR$/web/Step02DataBase/member/insert.jsp" value="file://$PROJECT_DIR$/web/Step02DataBase/member" />
         <entry key="file://$PROJECT_DIR$/web/Step02DataBase/member/list.jsp" value="file://$PROJECT_DIR$/web/Step02DataBase/member" />
+        <entry key="file://$PROJECT_DIR$/web/Step02DataBase/member/updateform.jsp" value="file://$PROJECT_DIR$/web/Step02DataBase/member" />
         <entry key="file://$PROJECT_DIR$/web/index.html" value="file://$PROJECT_DIR$/web" />
       </map>
     </option>

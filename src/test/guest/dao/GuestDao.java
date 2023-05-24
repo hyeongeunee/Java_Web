@@ -1,12 +1,7 @@
-package test.member.dao;
-/*
-*   Application 전역에서 MemberDao 객체는 오직 한 개만 생성해서 사용하도록 구조를 만들어야 한다.
-*
-*   1. 외부에서 객체 생성하지 못하도록 생성자의 접근 지정자는 private
-*   2. 자신의 참조값을 저장할 수 있는 static 필드 만들기
-*   3. 자신의 참조값을 리턴해주는 public 메소드 만들기
-*/
+package test.guest.dao;
 
+
+import test.guest.dto.GuestDto;
 import test.member.dto.MemberDto;
 import test.util.DbcpBean;
 
@@ -17,26 +12,23 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemberDao {
-    //2.
-    private static MemberDao dao;
+public class GuestDao {
+    private static GuestDao dao;
 
-    //1.
-    private MemberDao() {
+    private GuestDao(){
+
     }
-    //3.
-    public static MemberDao getInstance() {
+    public static GuestDao getInstance() {
         //서버 시작 후 최초 요청이라면
         //객체를 생성해서 static 필드에 저장해 놓는다
-        if (dao == null) dao = new MemberDao();
+        if (dao == null) dao = new GuestDao();
         //필드에 저장된 참조값 리턴해주기
         return dao;
     }
 
-    //회원 목록을 리턴하는 메소드
-    public List<MemberDto> getList(){
+    public List<GuestDto> getList(){
         //회원 목록을 담을 객체 미리 생성하기
-        List<MemberDto> list = new ArrayList<>();
+        List<GuestDto> list = new ArrayList<>();
 
         //필요한 객체의 참조값을 담을 지역변수 미리 만들기
         Connection conn = null;
@@ -46,8 +38,8 @@ public class MemberDao {
             //DbcpBean 객체를 이용해서 Connection 객체를 얻어온다(Connection Pool 에서 얻어오기).
             conn = new DbcpBean().getConn();
             //실행할 sql 문
-            String sql = "select num, name, addr"
-                    + " from member "
+            String sql = "select *"
+                    + " from board_guest "
                     +" order by num asc";
             pstmt = conn.prepareStatement(sql);
             //sql 문이 미완성이라면 여기서 완성
@@ -57,15 +49,17 @@ public class MemberDao {
             //반복문 돌면서 ResultSet 에 담긴 내용 추출
             while (rs.next()) {
                 //ResultSet 에 Cursor 가 위치한 곳의 칼럼 정보를 얻어와서 MemberDto 객체에 담고
-                MemberDto dto = new MemberDto();
+                GuestDto dto = new GuestDto();
                 dto.setNum(rs.getInt("num"));
-                dto.setName(rs.getString("name"));
-                dto.setAddr(rs.getString("addr"));
+                dto.setWriter(rs.getString("writer"));
+                dto.setContent(rs.getString("content"));
+                dto.setPwd(rs.getString("pwd"));
+                dto.setRegdate(rs.getString("regdate"));
                 //ArrayList 객체에 누적시키기
                 list.add(dto);
             }
         } catch (SQLException se) {
-             se.printStackTrace();
+            se.printStackTrace();
         } finally {
             try {
                 if (rs != null) rs.close();
@@ -79,44 +73,7 @@ public class MemberDao {
         return list;
     }
 
-    //회원 한명의 정보를 리턴하는 메소드
-    public MemberDto getData(int num){
-        MemberDto dto = null;
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            //Connection 객체의 참조값 얻어오기
-            conn = new DbcpBean().getConn();
-            //실행할 sql문
-            String sql = "SELECT name, addr"
-                    + " FROM member"
-                    + " WHERE num = ?";
-            //sql문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
-            pstmt = conn.prepareStatement(sql);
-            //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.
-            pstmt.setInt(1, num);
-            rs = pstmt.executeQuery(); //수행하고 리턴되는 값을 변수에 담는다.
-            while (rs.next()){
-                dto = new MemberDto();
-                dto.setNum(num); //번호는 지역 변수에 있는 값을 담고
-                //이름과 주소는 ResultSet으로 부터 얻어내서 담는다
-                dto.setName(rs.getString("name"));
-                dto.setAddr(rs.getString("addr"));
-            }
-        } catch (SQLException se){
-            se.printStackTrace();
-        } finally { //예외가 발생을 하던 안하던 실행이 보장되는 블럭에서 사용
-            try {
-                if (rs != null) rs.close();
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (Exception ignored) {}
-        }
-        return dto;
-    } // getData()
-
-    public boolean insert(String name, String addr) {
+    public boolean insert(String writer, String content, String pwd) {
         int rowCount = 0; //초기값을 0으로 부여
         //insert, update, delete 작업을 통해서 변화된(추가, 수정, 삭제) row의 개수를 담을 변수
         Connection conn = null;
@@ -125,17 +82,18 @@ public class MemberDao {
             //Connection 객체의 참조값 얻어오기
             conn = new DbcpBean().getConn();
             //실행할 sql문
-            String sql = "insert into member"
-                    + "(num, name, addr)"
-                    + "values (member_seq.nextval, ?, ?)";
+            String sql = "insert into board_guest"
+                    + "(num, writer, content, pwd, regdate)"
+                    + "values (board_guest_seq.nextval, ?, ?, ?, to_char(sysdate,'yyyy.mm.dd hh24:mi'))";
             //sql문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
             pstmt = conn.prepareStatement(sql);
             //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.
-            pstmt.setString(1, name);
-            pstmt.setString(2, addr);
+            pstmt.setString(1, writer);
+            pstmt.setString(2, content);
+            pstmt.setString(3, pwd);
             //insert or update or delete 문을 실제 수행한다. 변화된 row의 개수가 리턴된다.
             rowCount = pstmt.executeUpdate(); //수행하고 리턴되는 값을 변수에 담는다.
-            System.out.println("추가되었습니다.");
+            System.out.println("작성되었습니다.");
         } catch (Exception e){
             e.printStackTrace();
         } finally { //예외가 발생을 하던 안하던 실행이 보장되는 블럭에서 사용
@@ -148,27 +106,23 @@ public class MemberDao {
         return rowCount > 0;
     }
 
-    public boolean update(MemberDto dto) {
-        int rowCount = 0; //초기값을 0으로 부여
-        //insert, update, delete 작업을 통해서 변화된(추가, 수정, 삭제) row의 개수를 담을 변수
+    public boolean check(int num, String pw){
+        int rowCount = 0;
         Connection conn = null;
         PreparedStatement pstmt=null;
         try {
             //Connection 객체의 참조값 얻어오기
             conn = new DbcpBean().getConn();
             //실행할 sql문
-            String sql = "update member"
-                    + " SET name = ?, addr = ?"
-                    + " WHERE num = ?";
+            String sql = "SELECT * FROM board_guest"
+                    + " WHERE num = ? AND pw = ?";
             //sql문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
             pstmt = conn.prepareStatement(sql);
             //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.
-            pstmt.setString(1, dto.getName());
-            pstmt.setString(2, dto.getAddr());
-            pstmt.setInt(3, dto.getNum());
-            //insert or update or delete 문을 실제 수행한다. 변화된 row의 개수가 리턴된다.
+            pstmt.setInt(1, num);
+            pstmt.setString(2, pw);
             rowCount = pstmt.executeUpdate(); //수행하고 리턴되는 값을 변수에 담는다.
-            System.out.println("수정되었습니다.");
+            System.out.println("비밀번호 일치");
         } catch (Exception e){
             e.printStackTrace();
         } finally { //예외가 발생을 하던 안하던 실행이 보장되는 블럭에서 사용
@@ -189,7 +143,7 @@ public class MemberDao {
             //Connection 객체의 참조값 얻어오기
             conn = new DbcpBean().getConn();
             //실행할 sql문
-            String sql = "DELETE FROM member"
+            String sql = "DELETE FROM board_guest"
                     + " WHERE num = ?";
             //sql문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
             pstmt = conn.prepareStatement(sql);
