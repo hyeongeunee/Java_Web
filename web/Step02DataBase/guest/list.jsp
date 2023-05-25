@@ -110,10 +110,13 @@
     </style>
 </head>
 <body>
+<jsp:include page="/include/navbar.jsp">
+    <jsp:param name="current" value="guest"/>
+</jsp:include>
 <div class="container mt-3">
     <h1 style="text-align: center">방명록 목록</h1>
     <a href="insertform.jsp">작성하기</a>
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>글번호</th>
@@ -138,5 +141,9 @@
         </tbody>
     </table>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+<script>
 </body>
 </html>

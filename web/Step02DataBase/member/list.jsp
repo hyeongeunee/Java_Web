@@ -89,6 +89,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="/include/navbar.jsp">
+  <jsp:param name="current" value="member"/>
+</jsp:include>
   <div class="container">
     <h1>회원 목록</h1>
     <div class="text-end">

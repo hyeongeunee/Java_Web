@@ -25,7 +25,8 @@
             height: 100%;
         }
 
-        body {
+        .container {
+            margin-top: 80px;
             place-content: center;
             display: grid;
         }
@@ -212,10 +213,24 @@
 </head>
 
 <body>
+    <%--
+        /include/navbar.jsp 페이지에게 이 부분만 응답하도록 한다.
+        include 되는 jsp 페이지에 파라미터를 전달할 수도 있다.
+    --%>
+<%-- navbar 호출하기 --%>
+<jsp:include page="/include/navbar.jsp">
+    <jsp:param name="current" value="index"/>
+</jsp:include>
 <div class="container">
     <div class="index mt-3">
         <h1><span>Step02_DataBase</span>인덱스 페이지</h1>
-        <p></p>
+        <p>${pageContext.request.contextPath }</p><br>
+        <label for="PageList" class="form-label"></label>
+        <input type="text" class="form-control" list="PageListOptions" id="PageList" placeholder="page to search..."/>
+        <datalist id="PageListOptions">
+            <option value="Hello"></option>
+            <option value="Step01Servlet"></option>
+        </datalist>
     </div>
 </div>
 <div class="container mt-5"></div>
@@ -235,10 +250,20 @@
         <i class="btn__bg" aria-hidden="true"></i>
     </button>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+<script>
+    //검색창에 뭐가 적힌지 따와서
+    document.querySelector("#PageList").addEventListener("keyup", (e) => {
+        let msg = e.target.value;
+        if (e.key === "Enter"){
+            if (msg == "Hello" || msg == "Step01Servlet"){
+                window.location = '../'+msg;
+                e.target.value="";
+            }
+        }
+    })
+</script>
 </body>
-
 </html>
