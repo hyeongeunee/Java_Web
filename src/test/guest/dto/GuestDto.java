@@ -56,15 +56,5 @@ public class GuestDto {
         this.regdate = regdate;
     }
 
-    @Override
-    public String toString() {
-        return "GuestDto{" +
-                "num=" + num +
-                ", writer='" + writer + '\'' +
-                ", content='" + content + '\'' +
-                ", pwd='" + pwd + '\'' +
-                ", regDate='" + regdate + '\'' +
-                '}';
-    }
 }
 
