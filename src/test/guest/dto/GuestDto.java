@@ -1,12 +1,14 @@
 package test.guest.dto;
 
 public class GuestDto {
-
+    //필드 선언하기
     private int num;
     private String writer;
     private String content;
     private String pwd;
     private String regdate;
+
+    //디폴트 생성자
     public GuestDto () {}
     public int getNum() {
         return num;

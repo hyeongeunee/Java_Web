@@ -17,8 +17,134 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>index.jsp</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            place-content: center;
+            display: grid;
+        }
+
+        .btn {
+            background: hsl(var(--hue), 98%, 80%);
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            color: black;
+            font: 600 1.05rem/1 "Nunito", sans-serif;
+            letter-spacing: 0.05em;
+            overflow: hidden;
+            padding: 1.15em 3.5em;
+            min-height: 3.3em;
+            position: relative;
+            text-transform: lowercase;
+        }
+
+        .btn--yellow {
+            --hue: 46;
+        }
+
+        .btn--green {
+            --hue: 163;
+        }
+
+        .btn--purple {
+            --hue: 244;
+        }
+
+        .btn--red {
+            --hue: 0;
+        }
+
+        .btn--blue {
+            --hue: 210;
+        }
+
+        .btn:active,
+        .btn:focus {
+            outline: 3px solid hsl(calc(var(--hue) + 90), 98%, 80%);
+        }
+
+        .btn__txt {
+            position: relative;
+            z-index: 2;
+        }
+        .btn + .btn {
+            margin-left: 0.5em;
+        }
+        .btn__bg {
+            background: hsl(var(--hueBg), 98%, 80%);
+            border-radius: 50%;
+            display: block;
+            height: 0;
+            left: 50%;
+            margin: -50% 0 0 -50%;
+            padding-top: 100%;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: scale(0);
+            transform-origin: 50% 50%;
+            transition: transform 0.175s cubic-bezier(0.5, 1, 0.89, 1);
+            z-index: 1;
+        }
+
+        .btn__bg:nth-of-type(1) {
+            --hueBg: calc(var(--hue) - 90);
+            transition-delay: 0.1725s;
+        }
+
+        .btn__bg:nth-of-type(2) {
+            --hueBg: calc(var(--hue) - 180);
+            transition-delay: 0.115s;
+        }
+
+        .btn__bg:nth-of-type(3) {
+            --hueBg: calc(var(--hue) - 270);
+            transition-delay: 0.0575s;
+        }
+
+        .btn__bg:nth-of-type(4) {
+            --hueBg: calc(var(--hue) - 360);
+            transition-delay: 0s;
+        }
+
+        .btn:hover .btn__bg,
+        .btn:focus .btn__bg,
+        .btn:active .btn__bg {
+            transform: scale(1.5);
+            transition: transform 0.35s cubic-bezier(0.11, 0, 0.5, 0);
+        }
+
+        .btn:hover .btn__bg:nth-of-type(1),
+        .btn:focus .btn__bg:nth-of-type(1),
+        .btn:active .btn__bg:nth-of-type(1) {
+            transition-delay: 0.115s;
+        }
+
+        .btn:hover .btn__bg:nth-of-type(2),
+        .btn:focus .btn__bg:nth-of-type(2),
+        .btn:active .btn__bg:nth-of-type(2) {
+            transition-delay: 0.23s;
+        }
+
+        .btn:hover .btn__bg:nth-of-type(3),
+        .btn:focus .btn__bg:nth-of-type(3),
+        .btn:active .btn__bg:nth-of-type(3) {
+            transition-delay: 0.345s;
+        }
+
+        .btn:hover .btn__bg:nth-of-type(4),
+        .btn:focus .btn__bg:nth-of-type(4),
+        .btn:active .btn__bg:nth-of-type(4) {
+            transition-delay: 0.46s;
+        }
+
         h1 {
             position: relative;
             padding: 0;
@@ -37,18 +163,32 @@
             font-size: 0.5em;
             line-height: 1.3;
         }
+
         h1 em {
             font-style: normal;
             font-weight: 600;
         }
+
         .index h1 {
-            text-align:center; font-size:50px; text-transform:uppercase; color:#222; letter-spacing:1px;
-            font-family:"Playfair Display", serif; font-weight:400;
+            text-align: center;
+            font-size: 50px;
+            text-transform: uppercase;
+            color: #222;
+            letter-spacing: 1px;
+            font-family: "Playfair Display", serif;
+            font-weight: 400;
         }
+
         .index h1 span {
             margin-top: 5px;
-            font-size:15px; color:#444; word-spacing:1px; font-weight:normal; letter-spacing:2px;
-            text-transform: uppercase; font-family: "Oswald", sans-serif; font-weight:500;
+            font-size: 15px;
+            color: #444;
+            word-spacing: 1px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: "Oswald", sans-serif;
+            font-weight: 500;
             display: grid;
             grid-template-columns: 1fr max-content 1fr;
             grid-template-rows: 27px 0;
@@ -56,25 +196,49 @@
             align-items: center;
         }
 
-        .index h1 span:after,.index h1 span:before {
+        .index h1 span:after,
+        .index h1 span:before {
             content: " ";
             display: block;
             border-top: 1px solid #ccc;
             height: 3px;
-            background-color:#ffffff;
+            background-color: #ffffff;
+        }
+
+        .d-md-block {
+            text-align: center;
         }
     </style>
 </head>
+
 <body>
 <div class="container">
     <div class="index mt-3">
         <h1><span>Step02_DataBase</span>인덱스 페이지</h1>
+        <p></p>
     </div>
-    <ul class="mt-5">
-        <li><a href="member/list.jsp">회원 목록보기</a></li>
-        <li><a href="guest/list.jsp">방명록 목록보기</a></li>
-    </ul>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+<div class="container mt-5"></div>
+<div class="d-grid gap-4 d-md-block">
+    <button type="button" class="btn btn--blue" onclick="location.href='member/list.jsp';">
+        <span class="btn__txt">회원 목록</span>
+        <i class="btn__bg" aria-hidden="true"></i>
+        <i class="btn__bg" aria-hidden="true"></i>
+        <i class="btn__bg" aria-hidden="true"></i>
+        <i class="btn__bg" aria-hidden="true"></i>
+    </button>
+    <button type="button" class="btn btn--green" onclick="location.href='guest/list.jsp';">
+        <span class="btn__txt">방명록 보기</span>
+        <i class="btn__bg" aria-hidden="true"></i>
+        <i class="btn__bg" aria-hidden="true"></i>
+        <i class="btn__bg" aria-hidden="true"></i>
+        <i class="btn__bg" aria-hidden="true"></i>
+    </button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -10,9 +10,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    //1. 전체 방명록 글 목록을 얻어오기
     request.setCharacterEncoding("utf-8");
     GuestDao dao = GuestDao.getInstance();
     List<GuestDto> list = dao.getList();
+    //2. 응답하기
 %>
 <html>
 <head>
