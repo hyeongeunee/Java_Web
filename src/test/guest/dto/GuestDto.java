@@ -55,4 +55,16 @@ public class GuestDto {
     public void setRegdate(String regdate) {
         this.regdate = regdate;
     }
+
+    @Override
+    public String toString() {
+        return "GuestDto{" +
+                "num=" + num +
+                ", writer='" + writer + '\'' +
+                ", content='" + content + '\'' +
+                ", pwd='" + pwd + '\'' +
+                ", regDate='" + regdate + '\'' +
+                '}';
+    }
 }
+

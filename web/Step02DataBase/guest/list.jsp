@@ -11,7 +11,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.setCharacterEncoding("utf-8");
-    //sample data
     GuestDao dao = GuestDao.getInstance();
     List<GuestDto> list = dao.getList();
 %>
@@ -24,7 +23,7 @@
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
+<div class="container mt-3">
     <h1 style="text-align: center">방명록 목록</h1>
     <a href="insertform.jsp">작성하기</a>
     <table class="table table-hover">
@@ -33,63 +32,24 @@
             <th>글번호</th>
             <th>작성자</th>
             <th>내용</th>
-            <th>등록일</th>
+            <th>수정</th>
             <th>삭제</th>
+            <th>등록일</th>
         </tr>
         </thead>
         <tbody>
-        <%for (GuestDto member : list) {%>
+        <% for (GuestDto tmp : list) { %>
         <tr>
-            <td><%=member.getNum() %>
-            </td>
-            <td><%=member.getWriter() %>
-            </td>
-            <td><%=member.getContent() %>
-            </td>
-            <td><%=member.getRegdate() %>
-            </td>
-            <td>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                        data-bs-whatever="@mdo">삭제
-                </button>
-                <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">비밀번호 입력</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="delete.jsp" method="get">
-                                    <div class="mb-3">
-                                        <label for="num" class="col-form-label"></label>
-                                        <p><%= member.getNum()%> 번 회원</p>
-                                        <input type="hidden" class="form-control" id="num" name="num" value="<%=member.getNum()%>"/>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="pwd" class="col-form-label">비밀번호</label>
-                                        <input type="text" class="form-control" id="pwd" name="pwd"/>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
-                                        </button>
-                                        <button type="submit" class="btn btn-primary">Send</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </td>
+            <td><%= tmp.getNum() %></td>
+            <td><%= tmp.getWriter() %></td>
+            <td><%= tmp.getContent() %></td>
+            <td><a href="updateform.jsp?num=<%= tmp.getNum() %>">수정</a></td>
+            <td><a href="deleteform.jsp?num=<%= tmp.getNum() %>">삭제</a></td>
+            <td><%= tmp.getRegdate() %></td>
         </tr>
-        <%} %>
+        <% } %>
         </tbody>
     </table>
 </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
-        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
-        crossorigin="anonymous"></script>
 </html>
