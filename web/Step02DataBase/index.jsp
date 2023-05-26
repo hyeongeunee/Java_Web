@@ -230,6 +230,7 @@
         <datalist id="PageListOptions">
             <option value="Hello"></option>
             <option value="Step01Servlet"></option>
+            <option value="Step03Scope"></option>
         </datalist>
     </div>
 </div>
@@ -258,7 +259,7 @@
     document.querySelector("#PageList").addEventListener("keyup", (e) => {
         let msg = e.target.value;
         if (e.key === "Enter"){
-            if (msg == "Hello" || msg == "Step01Servlet"){
+            if (msg == "Hello" || msg == "Step01Servlet" || msg == "Step03Scope"){
                 window.location = '../'+msg;
                 e.target.value="";
             }

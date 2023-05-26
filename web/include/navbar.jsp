@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<nav class="navbar bg-body nav-bar-expand-md">
+<nav class="navbar bg-body navbar-expand-xl">
   <%--    container-fluid > 한 줄 다 쓰는거--%>
   <%--
          어두운 색 계열의 navbar 배경색이면 data-bs-theme="dark"
@@ -22,12 +22,19 @@
         <li class="nav-item">
           <%-- 나브바 링크에 active 추가하면 밝아짐 >> 본인이 어떤 페이지에 include 되있는지 정보를 받아서 active 해야함 --%>
           <%--          --%>
-          <a class="nav-link" href="member/list.jsp">회원목록</a>
+          <a class="nav-link <%=current.equals("member") ? "active":"" %>" href="member/list.jsp">회원목록</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="guest/list.jsp">방명록</a>
+          <a class="nav-link <%=current.equals("guest") ? "active":"" %>" href="guest/list.jsp">방명록</a>
         </li>
       </ul>
+      <form class="d-flex">
+        <input type="search" class="form-control me-2" placeholder="Search">
+        <button class="btn btn-info" type="submit">Search</button>
+      </form>
+      <span class="navbar-text ms-2">
+        Made by hyeongeun
+      </span>
     </div>
   </div>
 </nav>
