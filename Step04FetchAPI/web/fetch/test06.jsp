@@ -21,14 +21,13 @@
     //문자열을 입력하고 전송 버튼을 눌렀을 때 입력한 문자열을 읽어와서 send.jsp 페이지로 전송이 되도록 하기
     document.querySelector("#moreBtn").addEventListener("click", ()=>{
         fetch("get_msg2.jsp")
-        .then(res=>res.text())
-        .then((data)=>{
+        .then((data)=> data.json())
+        .then((obj)=>{
             //data 는 ["어쩌구", "저쩌구", "이러쿵"] 형식의 실제 배열이다.
-
             //반복문 돌면서
-            for(let i = 0; i < data.length; i++){
+            for(let i = 0; i < obj.length; i++){
                 //backtick 을 활용해서 li 안에 메세지를 출력하고
-                let li = `<li>\${data[i]}</li>`;
+                let li = `<li>\${obj[i]}</li>`;
                 document.querySelector("#msgList").insertAdjacentHTML("beforeend", li);
             }
         })

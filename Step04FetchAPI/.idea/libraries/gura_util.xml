@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gura_util" type="kotlin.js">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/web/js/gura_util.js" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

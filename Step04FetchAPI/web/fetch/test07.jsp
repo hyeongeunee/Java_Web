@@ -5,7 +5,7 @@
   Time: 오후 4:48
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>fetch/test07.jsp</title>
@@ -24,13 +24,13 @@
     <button type="submit">로그인</button>
   </form>
   <%-- 외부 javascript 로딩 --%>
-  <script src="../js/gura_util.js"></script>
+  <script src="${pageContext.request.contextPath }/js/gura_util.js"></script>
   <script>
-
     document.querySelector("#myForm2").addEventListener("submit", (e)=>{
+      //event 객체 안에 있는 preventDefault() 함수를 호출하면 폼 제출 막기
       e.preventDefault();
       //gura_util.js 안에 있는 ajaxFormPromise() 함수 활용하기
-      ajaxPromise(e.target) //함수 호출하면서 폼의 참조값 전달
+      ajaxFormPromise(e.target) //함수 호출하면서 폼의 참조값 전달
       .then(res=>res.json())
       .then((data)=>{
         console.log(data);
@@ -43,7 +43,7 @@
         .addEventListener("submit", ()=>{}) 을 활용하면 된다.
      */
     document.querySelector("#myForm").addEventListener("submit", (e)=>{
-      //event 객체 안에 있는 preventDefault() 함수를 호출하면
+      //event 객체 안에 있는 preventDefault() 함수를 호출하면 폼 제출 막기
       e.preventDefault();
       //fetch 함수를 이용해서 페이지 전환 없이 입력한 내용을 읽어와서 직접 제출하기
 
@@ -56,10 +56,10 @@
         headers : {"Content-Type":"application/x-www-form-urlencoded; charset=utf-8"},
         body : queryString
       })
-              .then(res=>res.json())
-              .then((data)=>{
-                console.log(data);
-              })
+      .then(res=>res.json())
+      .then((data)=>{
+        console.log(data);
+      })
     })
   </script>
 </body>

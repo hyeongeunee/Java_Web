@@ -7,14 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--Json을 쓸 때는 text/html 말고 application/json--%>
-<%@ page contentType="application/json;charset=UTF-8" language="java" %>
+<%@ page contentType="application/json; charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%
+
   //DB 에서 읽어온 더보기 메세지 목록이라고 가정하자
   List<String> list = new ArrayList<>();
   list.add("어쩌구");
   list.add("저쩌구");
   list.add("이러쿵");
-  System.out.println("xxx");
 %>
 [
 <%for(int i = 0; i < list.size(); i++){%>
