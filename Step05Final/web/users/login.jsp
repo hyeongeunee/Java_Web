@@ -1,5 +1,6 @@
 <%@ page import="test.users.dto.UsersDto" %>
-<%@ page import="test.users.dao.UsersDao" %><%--
+<%@ page import="test.users.dao.UsersDao" %>
+<%@ page import="java.net.URLEncoder" %><%--
   Created by IntelliJ IDEA.
   User: acorn
   Date: 2023-05-31
@@ -17,7 +18,7 @@
     dto.setId(id);
     dto.setPwd(pwd);
   //3. UsersDao 에 전달해서 유효한 정보인지 확인해서
-    boolean isValid = UsersDao.getInstance().insert(dto);
+    boolean isValid = UsersDao.getInstance().isValid(dto);
   /*
     4. 유효한 정보이면 로그인 처리를 하고 응답한다.
        유효한 정보가 아니면 아이디 혹은 비밀번호가 틀려요 라고 응답한다.
@@ -32,6 +33,10 @@
         session.setAttribute("id", id);
     }
 
+    //로그인 후 가야할 목적지 정보
+    String url = request.getParameter("url");
+    //로그인 실패를 대비해서 목적지 정보를 인코딩한 결과도 준비한다.
+    String encodedUrl = URLEncoder.encode(url);
 %>
 <html>
 <head>
@@ -43,12 +48,14 @@
         <%if (isValid){%>
             <p class="alert alert-success">
                 <strong><%=dto.getId()%></strong>님 로그인되었습니다.
-                <a href="../index.jsp">확인</a>
+                <a href="<%=url%>">확인</a>
+<%--                <a href="../index.jsp">확인</a>--%>
             </p>
         <%}else{%>
             <p class="alert alert-danger">
                 아이디 혹은 비밀번호가 틀려요
                 <a href="loginform.jsp">다시 시도</a>
+                <a href="../users/loginform.jsp?url=<%=encodedUrl%>"></a>
             </p>
         <%}%>
     </div>

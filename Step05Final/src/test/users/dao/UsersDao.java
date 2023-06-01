@@ -33,7 +33,7 @@ public class UsersDao {
             //Connection Pool 에서 Connection 객체를 하나 얻어온다.
             conn = new DbcpBean().getConn();
             //실행할 sql 문의 뼈대 구성하기
-            String sql = "SELECT id FROM user_tb WHERE id=? AND pwd=?";
+            String sql = "SELECT id FROM USER_TB WHERE id=? AND pwd=?";
             //sql 문의 ? 에 바인딩 할게 있으면 한다
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, dto.getId());
@@ -71,7 +71,7 @@ public class UsersDao {
             //Connection 객체의 참조값 얻어오기
             conn = new DbcpBean().getConn();
             //실행할 sql문
-            String sql = "INSERT INTO user_tb (id, pwd, email, regdate) VALUES (?, ?, ?, SYSDATE)";
+            String sql = "INSERT INTO USER_TB (id, pwd, email, regdate) VALUES (?, ?, ?, SYSDATE)";
             //sql문을 대신 실행해줄 PreparedStatement 객체의 참조값 얻어오기
             pstmt = conn.prepareStatement(sql);
             //sql 문이 ? 가 존재하는 미완성이라면 여기서 완성한다.

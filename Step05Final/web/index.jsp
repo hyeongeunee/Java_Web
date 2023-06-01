@@ -30,6 +30,7 @@
         <li><a href="users/loginform.jsp">로그인</a></li>
         <li><a href="private/study.jsp">공부하기(로그인필요)</a></li>
         <li><a href="private/game.jsp">놀러가기(로그인필요)</a></li>
+        <li><a href="file/list.jsp">자료실</a></li>
       </ul>
     </div>
   </body>
