@@ -22,6 +22,44 @@ public class FileDao {
         return dao;
     }
 
+    //파일 하나의 정보를 리턴해주는 메소드
+    public FileDto getData(int num){
+        FileDto dto = null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = new DbcpBean().getConn();
+            String sql = "SELECT WRITER, TITLE, ORGFILENAME, SAVEFILENAME, FILESIZE, REGDATE"
+                    + " FROM BOARD_FILE"
+                    + " WHERE NUM=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, num);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                dto = new FileDto();
+                dto.setNum(num);
+                dto.setWriter(rs.getString("writer"));
+                dto.setTitle(rs.getString("title"));
+                dto.setOrgFileName(rs.getString("orgFileName"));
+                dto.setSaveFileName(rs.getString("saveFileName"));
+                dto.setFileSize(rs.getLong("fileSize"));
+                dto.setRegdate(rs.getString("regdate"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return dto;
+    }
+
+
     //파일 정보 불러오기
     public List<FileDto>getList(){
         List<FileDto>list = new ArrayList<>();
@@ -30,7 +68,7 @@ public class FileDao {
         ResultSet rs = null;
         try {
             conn = new DbcpBean().getConn();
-            String sql = "SELECT * FROM BOARD_FILE ORDER BY num ASC";
+            String sql = "SELECT * FROM BOARD_FILE ORDER BY num DESC";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
@@ -44,7 +82,6 @@ public class FileDao {
                 dto.setRegdate(rs.getString("regDate"));
                 list.add(dto);
             }
-            System.out.println("getList");
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -57,7 +94,6 @@ public class FileDao {
         }
         return list;
     }
-
 
     //업로드된 파일 정보를 DB 에 저장하는 메소드
     public boolean insert(FileDto dto) {
@@ -76,6 +112,38 @@ public class FileDao {
             pstmt.setString(3, dto.getOrgFileName());
             pstmt.setString(4, dto.getSaveFileName());
             pstmt.setLong(5, dto.getFileSize());
+            // INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW 의 갯수 리턴 받기
+            rowCount = pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (Exception e) {
+            }
+        }
+        if (rowCount > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //파일 정보를 삭제하는 메소드
+    public boolean delete(int num){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int rowCount = 0;
+        try {
+            conn = new DbcpBean().getConn();
+            String sql = "DELETE FROM BOARD_FILE"
+                    + " WHERE NUM = ?";
+            pstmt = conn.prepareStatement(sql);
+            // ? 에 바인딩할게 있으면 해주고
+            pstmt.setInt(1, num);
             // INSERT OR UPDATE OR DELETE 문을 수행하고 수정되거나, 삭제되거나, 추가된 ROW 의 갯수 리턴 받기
             rowCount = pstmt.executeUpdate();
         } catch (Exception e) {

@@ -1,11 +1,13 @@
 package test.users.dao;
 
+import test.file.FileDto;
 import test.users.dto.UsersDto;
 import test.util.DbcpBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UsersDao {
     private static UsersDao dao;
@@ -19,12 +21,103 @@ public class UsersDao {
         return dao;
     }
 
+    // 비밀번호를 수정하는 메소드
+    public boolean updatePwd(UsersDto dto){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int rowCount = 0;
+        try {
+            conn = new DbcpBean().getConn();
+            String sql = "UPDATE USER_TB"
+                    + " SET PWD = ?"
+                    + " WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, dto.getPwd());
+            pstmt.setString(2, dto.getId());
+            rowCount = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+            }
+        } if (rowCount >0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //프로필 이미지 경로를 수정하는 메소드
+    public boolean updateProfile(UsersDto dto){
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        int rowCount = 0;
+        try {
+            conn = new DbcpBean().getConn();
+            String sql = "UPDATE USER_TB"
+                    +" SET PROFILE = ?"
+                    +" WHERE id = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, dto.getProfile());
+            pstmt.setString(2, dto.getId());
+            rowCount = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+            }
+        } if (rowCount > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //회원 한명의 정보를 리턴하는 메소드
+    public UsersDto getData(String id) {
+        UsersDto dto = null;
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            conn = new DbcpBean().getConn();
+            String sql = "SELECT pwd, email, profile, regdate"
+                    + " FROM USER_TB"
+                    + " WHERE id=?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, id);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                dto = new UsersDto();
+                dto.setId(id);
+                dto.setPwd(rs.getString("pwd"));
+                dto.setEmail(rs.getString("email"));
+                dto.setProfile(rs.getString("profile"));
+                dto.setRegdate(rs.getString("regdate"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+            }
+        }
+        return dto;
+    }
+
     //인자로 전달되는 dto 에 있는 아이디와, 비밀번호를 이용해서 해당 정보가 유효한 정보인지 여부를 리턴하는 메소드
     public boolean isValid(UsersDto dto) {
-
         //아이디 비밀번호 유효성 여부를 담을 변수 만들고 초기값 false 부여하기
         boolean isValid=false;
-
         //필요한 객체를 담을 지역변수를 미리 만들어 둔다.
         Connection conn = null;
         PreparedStatement pstmt = null;
