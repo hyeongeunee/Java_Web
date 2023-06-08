@@ -9,7 +9,7 @@
 <%
   //session scope 에 "id"라는 키값으로 저장된 문자열이 있는지 읽어와 본다.
   String id = (String)session.getAttribute("id");
-  //로그인을 했다면 null이 아니고 안했다면 null이다.
+  //로그인을 했다면 null 이 아니고 안했다면 null 이다.
 %>
 <html>
   <head>
@@ -20,7 +20,7 @@
     <div class="container">
       <%if(id != null){%>
         <p>
-          <a href="/users/private/info.jsp"><strong><%= id%></strong></a> 님 로그인중...
+          <a href="users/private/info.jsp"><strong><%= id%></strong></a> 님 로그인중...
           <a href="users/logout.jsp">로그아웃</a>
         </p>
       <%}%>
@@ -31,6 +31,7 @@
         <li><a href="private/study.jsp">공부하기(로그인필요)</a></li>
         <li><a href="private/game.jsp">놀러가기(로그인필요)</a></li>
         <li><a href="file/list.jsp">자료실</a></li>
+        <li><a href="test/signup_form.jsp">form 테스트</a></li>
       </ul>
     </div>
   </body>

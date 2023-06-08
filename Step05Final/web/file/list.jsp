@@ -19,6 +19,52 @@
 <html>
 <head>
     <title>file/list.jsp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <style>
+        .page_wrap {
+            text-align:center;
+            font-size:0;
+            margin-left: -3.5rem;
+        }
+        .page_nation {
+            display:inline-block;
+        }
+        .page_nation .none {
+            display:none;
+        }
+        .page_nation a {
+            display:block;
+            margin:0 3px;
+            float:left;
+            border:1px solid #e6e6e6;
+            width:28px;
+            height:28px;
+            line-height:28px;
+            text-align:center;
+            background-color:#fff;
+            font-size:13px;
+            color:#999999;
+            text-decoration:none;
+        }
+        .page_nation .arrow {
+            border:1px solid #ccc;
+        }
+
+        .page_nation .prev {
+            background:#f8f8f8 no-repeat center center;
+            margin-right:7px;
+        }
+        .page_nation .next {
+            background:#f8f8f8 no-repeat center center;
+            margin-left:7px;
+        }
+
+        .page_nation a.active {
+            background-color:#42454c;
+            color:#fff;
+            border:1px solid #42454c;
+        }
+    </style>
 </head>
 <body>
   <div class="container">
@@ -58,6 +104,21 @@
         <%}%>
       </tbody>
     </table>
+      <div class="page_wrap mt-5">
+          <div class="page_nation">
+              <a class="arrow prev" href="#"> ◀ </a>
+              <a href="list.jsp?pageNum=1" class="active" id="pageNum1">1</a>
+              <%for(int i = 2; i <= 5; i++){%>
+                <a class="page-link" href="list.jsp?pageNum=<%=i%>" id="pageNum<%=i%>"><%=i%></a>
+              <%}%>
+              <a class="arrow next" href="#"> ▶ </a>
+          </div>
+      </div>
+      <script>
+        // document.querySelector(".page_nation").addEventListener("click", ()=>{
+        //     document.querySelector("#pageNum").setAttribute('class', 'active');
+        // })
+      </script>
   </div>
 </body>
 </html>

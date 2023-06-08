@@ -185,5 +185,33 @@ public class UsersDao {
         //변화된 row 의 개수가 0보다 크면 작업 성공
         return rowCount > 0;
     }
+
+    //개인정보를 수정하는 메소드
+    public boolean update(UsersDto dto){
+        Connection conn = null;
+        PreparedStatement pstmt=null;
+        int rowCount = 0; //초기값을 0으로 부여
+        try {
+            conn = new DbcpBean().getConn();
+            String sql = "UPDATE USER_TB"
+                    + " SET EMAIL = ?, PROFILE = ?"
+                    + " WHERE ID = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, dto.getEmail());
+            pstmt.setString(2, dto.getProfile());
+            pstmt.setString(3, dto.getId());
+            rowCount = pstmt.executeUpdate(); //수행하고 리턴되는 값을 변수에 담는다.
+            System.out.println("추가되었습니다.");
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally { //예외가 발생을 하던 안하던 실행이 보장되는 블럭에서 사용
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception ignored) {}
+        }
+        //변화된 row 의 개수가 0보다 크면 작업 성공
+        return rowCount > 0;
+    }
 }
 

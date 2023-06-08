@@ -61,6 +61,7 @@
         <td><%=dto.getRegdate()%></td>
       </tr>
     </table>
+    <a href="updateform.jsp">개인정보 수정</a>
   </div>
 </body>
 </html>
