@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 // urlPatterns = String[
-@WebFilter(urlPatterns = {"/private/*", "/file/private/*", "/users/private/*"})
+@WebFilter(urlPatterns = {"/private/*", "/file/private/*", "/users/private/*", "/cafe/private/*"})
 public class LoginFilter implements Filter {
 
     @Override
