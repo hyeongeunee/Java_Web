@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Step07_component.html</title>
     <style>
-        .box{
+        .box {
             width: 100px;
             height: 100px;
             background-color: yellow;
@@ -15,33 +15,33 @@
     </style>
 </head>
 <body>
-    <h1>component 정의하고 사용하기</h1>
-    <div id="app">
-        <my-component></my-component>
-        <my-component></my-component>
-        <my-component></my-component>
-        <input type="text" v-model="msg"/>
-        <your-component v-bind:greet="'안녕하세요!'"></your-component>
-        <your-component v-bind:greet="msg"></your-component>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        let app=new Vue({
-            el:"#app",
-            data:{
-            	msg:""
+<h1>component 정의하고 사용하기</h1>
+<div id="app">
+    <my-component></my-component>
+    <my-component></my-component>
+    <my-component></my-component>
+    <input type="text" v-model="msg"/>
+    <your-component v-bind:greet="'안녕하세요!'"></your-component>
+    <your-component v-bind:greet="msg" v-bind:a="" v-bind:b=""></your-component>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        el        : "#app",
+        data      : {
+            msg: ""
+        },
+        components: {
+            "my-component"  : {
+                template: "<div class='box'> box </div>"
             },
-            components:{
-                "my-component":{
-                    template:"<div class='box'> box </div>"
-                },
-                "your-component":{
-                    template:"<div class='box'>{{greet}}</div>",
-                    props:["greet"]
-                }
-            }
-        });
-    </script>
+            "your-component": {
+                template: "<div class='box'>{{greet}}</div>",
+                props   : ["greet", "a", "b"]
+            },
+        },
+    });
+</script>
 </body>
 </html>
 
