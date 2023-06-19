@@ -7,34 +7,34 @@
     <title>Step08_eventEmit.html</title>
 </head>
 <body>
-    <h1>자식 component 에서 발생하는 이벤트</h1>
-    <div id="app">
-        <my-component v-on:mom="feed"></my-component>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script>
-        Vue.component("my-component", {
-            template:`
-                <div>
-                <button v-on:click="callMom">엄마!</button>
-                </div>
-            `,
-            methods:{
-                callMom(){
-                    // this.$emit("이벤트명", 전달할 data)
-                    this.$emit("mom", "배고파");
-                }
+<h1>자식 component 에서 발생하는 이벤트</h1>
+<div id="app">
+    <my-component v-on:mom="feed"></my-component>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component("my-component", {
+        template: `
+            <div>
+            <button v-on:click="callMom">엄마!</button>
+            </div>
+        `,
+        methods : {
+            callMom() {
+                // this.$emit("이벤트명", 전달할 data)
+                this.$emit("mom", "배고파");
             }
-        });
+        }
+    });
 
-        let app=new Vue({
-            el:"#app",
-            methods:{
-                feed(data){
-                    alert(data);
-                }
+    let app = new Vue({
+        el     : "#app",
+        methods: {
+            feed(data) {
+                alert(data);
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html>
