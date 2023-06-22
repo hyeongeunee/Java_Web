@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Step10_fetch2.html</title>
+</head>
+<body>
+<div class="container" id="app">
+    <h1>ajax 요청을 통해서 받아온 데이터 사용하기</h1>
+    <p>페이지 전환 없이 서버에 요청하는 것을 ajax 라고 생각하면 된다.</p>
+    <div>
+        <br>
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 글번호는 pk 이기 때문에 -->
+            <tr v-bind:key="tmp.num" v-for="tmp in obj.list">
+                <td>{{tmp.num}}</td>
+                <td>{{tmp.writer}}</td>
+                <td>{{tmp.title}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" v-if="obj.startPageNum !== 1">
+                <a @click="getPage(obj.startPageNum-1)" class="page-link" href="javascript:">Prev</a>
+            </li>
+            <li class="page-item" v-bind:key="item" v-for="item in pages">
+                <a :class="{active:item === obj.pageNum}" @click="getPage(item)" class="page-link"
+                   href="javascript:">{{item}}</a>
+            </li>
+            <li class="page-item" v-if="obj.endPageNum < obj.totalPageCount">
+                <a @click="getPage(obj.endPageNum+1)" class="page-link" href="javascript:">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el  : "#app",
+        data: {
+            obj  : {
+                list          : [],
+                pageNum       : 1,
+                startPageNum  : 0,
+                endPageNum    : 0,
+                totalPageCount: 0
+            },
+            pages: []
+        },
+        created() {
+            fetch("../cafe/json_list2.jsp")
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    //서버에서 응답된 데이터로 model 을 덮어쓰기 (UI 자동 업데이트)
+                    this.obj = data;
+                    const pages = [];
+                    //pages 배열 만들어서 덮어 쓰기
+                    for (let i = data.startPageNum; i <= this.obj.endPageNum; i++) {
+                        pages.push(i);
+                    }
+                    //pages 모델에 pages 배열 대입하기
+                    this.pages = pages;
+                })
+        },
+        methods: {
+            getPage(item) {
+                this.obj.pageNum = item;
+                console.log(item + " 페이지를 요청합니다");
+                fetch("../cafe/json_list2.jsp?pageNum=" + item)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        //서버에서 응답된 데이터로 model 을 덮어쓰기 (UI 자동 업데이트)
+                        this.obj = data;
+                        const pages = [];
+                        //pages 배열 만들어서 덮어 쓰기
+                        for (let i = this.obj.startPageNum; i <= data.endPageNum; i++) {
+                            pages.push(i);
+                        }
+                        //pages 모델에 pages 배열 대입하기
+                        this.pages = pages;
+                    })
+            },
+        },
+    })
+</script>
+</body>
+</html>

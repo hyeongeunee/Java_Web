@@ -6,6 +6,15 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="Step05Final" />
+          <element id="library" level="application" name="vue" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="commons-fileupload-1.3.2" />
+          <element id="library" level="project" name="json-20230618" />
+          <element id="library" level="project" name="cos" />
+          <element id="library" level="project" name="jstl-1.2" />
+          <element id="library" level="project" name="jstl-1.21" />
+          <element id="library" level="project" name="servlet-api" />
         </element>
       </element>
     </root>
