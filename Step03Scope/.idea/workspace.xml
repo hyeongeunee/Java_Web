@@ -10,37 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0d58335-cb04-4e53-8718-7675a609e511" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jsp_api.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Step03Scope.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/member/dao/MemberDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/member/dto/MemberDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/servlet/FortuneServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/servlet/FriendServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/servlet/MemberListServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/servlet/MemberServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/util/DbcpBean.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/member/list.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/test/fortune.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/test/friend.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web/test/member.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/test/servlet/FFortuneServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/test/servlet/FFriendServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../src/test/servlet/MemberServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web/Step03Scope/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web/Step03Scope/test/ffortune.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web/Step03Scope/test/ffriend.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web/Step03Scope/test/member.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web/Step02DataBase/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../web/Step02DataBase/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web/include/navbar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../web/include/navbar.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Step05Final/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Step05Final/.idea/webContexts.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Step05Final/Step05Final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Step05Final/Step05Final.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Step05Final/web/users/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/../Step05Final/web/users/signup.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Step05Final/web/vue2/Step07_component5.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Step05Final/web/vue2/Step07_component5.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +51,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/acorn202304/apache-tomcat-8.5.88/lib/servlet-api.jar",
+    "last_opened_file_path": "C:/acorn202304/web_work/Step03Scope",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -195,6 +168,7 @@
       <option name="presentableId" value="Default" />
       <updated>1685082108573</updated>
       <workItem from="1685082109569" duration="5780000" />
+      <workItem from="1687315848329" duration="54000" />
     </task>
     <servers />
   </component>
