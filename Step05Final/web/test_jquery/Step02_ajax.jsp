@@ -22,7 +22,8 @@
             // index.jsp 는 html 다 ~ 따오고, json_list.jsp 이거는 page contentType 이 application/json 이라서 배열 형식으로 따온다
             method : "get", //요청 방식
             data   : {
-                pageNum: 1,
+                pageNum: 1, // object, String 둘 다 가능 > ex. "pageNum=2"
+                // 바로 object 로 불러오기 때문에 . 찍어서 사용 가능
             },    //요청 파라미터
             success: function (data) {
                 console.log(data);
