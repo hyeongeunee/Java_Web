@@ -36,6 +36,13 @@
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.0/dist/jquery.min.js"></script>
 <script>
+    //test
+    const temp = `
+        <li>
+            <a href=""></a>
+        </li>
+    `;
+
     // 매개변수에 전달되는 페이지 번호에 해당하는 정보를 요청하는 함수
     function request(pageNum) {
         // 일단 clear !
@@ -59,30 +66,30 @@
                     // 아이디값 부여해서 추가해도 됨
                 });
 
+                // li 요소의 template
+                let template = `
+                    <li class="page-item">
+                        <a class="page-link" href="javascript:"></a>
+                    </li>
+                `;
+
                 if (data.startPageNum !== 1) {
-                    let template = `
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:request(\${data.startPageNum-1})">Prev</a>
-                        </li>
-                    `;
-                    $(template).appendTo(".pagination")
+                    $(template).find("a").text("Prev").on("click", function () {
+                        // a 요소를 클릭했을 때 새로운 자료를 요청한다.
+                        request(data.startPageNum - 1);
+                    }).parent().appendTo(".pagination");
                 }
                 // 반복문 돌면서 페이지 출력하기
                 for (let i = data.startPageNum; i <= data.endPageNum; i++) {
-                    let template = `
-                        <li class="page-item">
-                            <a class="page-link \${pageNum == i ? 'active':''}" href="javascript:request(\${i})">\${i}</a>
-                        </li>
-                    `;
-                    $(template).appendTo(".pagination");
+                    $(template).find("a").text(i).addClass(pageNum === i ? "active" : "").click(function () {
+                        request(i);
+                    }).parent().appendTo(".pagination");
                 }
                 if (data.endPageNum < data.totalPageCount) {
-                    let template = `
-                        <li class="page-item">
-                            <a class="page-link" href="javascript:request(\${data.endPageNum+1})">Next</a>
-                        </li>
-                    `;
-                    $(template).appendTo(".pagination")
+                    $(template).find("a").text("Next").on("click", function () {
+                        // a 요소를 클릭했을 때 새로운 자료를 요청한다.
+                        request(data.endPageNum + 1);
+                    }).parent().appendTo(".pagination");
                 }
             }
         });
